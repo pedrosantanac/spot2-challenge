@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/price-m2/zip-codes/{zip_code}/aggregate/{aggregate}', [PriceController::class, 'prices']);
+Route::get('/price-m2/zip-codes', [PriceController::class, 'zipcodes']);

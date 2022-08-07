@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cp ./tools/pre-commit .git/hooks/pre-commit
+echo "-> Running phpcs"
+./vendor/bin/phing phpcs || exit 1
+echo "Phpcs Ok! 🍺"
+echo "-> Running phpmd"
+./vendor/bin/phing phpmd || exit 1
+echo "Phpmd Ok! 🍺🍺"
+# echo "-> Running phpstan"
+# ./vendor/bin/phing phpstan || exit 1
+# echo "Phpstan OK! 🍺🍺🍺"

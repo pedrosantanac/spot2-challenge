@@ -1,0 +1,32 @@
+version: "3"
+services:
+  dev-spot2-challenge:
+    platform: linux/amd64
+    build:
+      context: ./tools/docker/runtimes/8.0
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    container_name: spot2-challenge
+    hostname: spot2-challenge.vm
+    external_links:
+      - databases:mysql
+
+    environment:
+      VIRTUAL_HOST: spot2-challenge.vm
+      WWWUSER: '${WWWUSER}'
+      WWWGROUP: 1000
+
+    volumes:
+      - ./tools/docker/bash_aliases:/home/developer/.bash_aliases
+      - .:/var/www
+    networks:
+      default:
+        aliases:
+          - spot2-challenge.vm
+    expose:
+      - "80"
+      - "443"
+networks:
+  default:
+    external:
+      name: nginx-proxy
